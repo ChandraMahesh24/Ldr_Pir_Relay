@@ -1,44 +1,32 @@
-int relay = 3;
-int ldr = 4;
-int pir = 5;
-int state = LOW;
-int pirVal = 0;
-int ldrRead = 0;
-int flag = 0;
+int LED=  3 ; // choose the pin for the RELAY
+int PIR =5  ; // choose the input pin (for PIR sensor)                 
 void setup()
+{    
+Serial.begin(9600);
+  pinMode( LED , OUTPUT); // declare lamp as output
+  pinMode(PIR,INPUT); // declare sensor as input  
+}                                                                                                                          
+void loop() 
 {
-    // put your setup code here, to run once:
-    Serial.begin(9600);
-    pinMode(relay, OUTPUT);
-    pinMode(ldr, INPUT);
-    pinMode(pir, INPUT);
+    
+  int value_ldr = analogRead(A4); // read LDR value
+  int value_pir = digitalRead(PIR); // read input value
+  Serial.println(value_ldr);
+  Serial.println(value_pir);
+
+ if(700<value_ldr){ 
+   value_pir==LOW;
+    if( value_pir==HIGH){
+       digitalWrite(LED,HIGH);  // Turn ON the light
+       delay(3000);        
+  }
+ }  
+ else {
+  
+    digitalWrite(LED,LOW); // Turn OFF the light
+       
+ }
+  
 }
-void loop()
-{
-    // put your main code here, to run repeatedly:
-    ldrRead = digitalRead(ldr);
-    pirVal = digitalRead(pir);
-    if (ldrRead == HIGH && pirVal == HIGH)
-    {
-        digitalWrite(relay, LOW);
-        delay(500);
-        if (state == LOW)
-        {
-            Serial.println("Motion detected!");
-            state = HIGH;
-        }
-    }
-    else
-    {
-        if (pirVal == LOW)
-        {
-            digitalWrite(relay, HIGH);
-            delay(500);
-            if (state == HIGH)
-            {
-                Serial.println("Motion stopped!");
-                state = LOW;
-            }
-        }
-    }
-}
+
+
