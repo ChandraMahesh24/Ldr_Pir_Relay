@@ -3,7 +3,7 @@ int PIR =5  ; // choose the input pin (for PIR sensor)
 void setup()
 {    
 Serial.begin(9600);
-  pinMode( LED , OUTPUT); // declare lamp as output
+  pinMode( LED , OUTPUT); // declare led as output
   pinMode(PIR,INPUT); // declare sensor as input  
 }                                                                                                                          
 void loop() 
